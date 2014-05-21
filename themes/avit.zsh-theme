@@ -67,9 +67,9 @@ MODE_INDICATOR="%{$fg_bold[yellow]%}❮%{$reset_color%}%{$fg[yellow]%}❮❮%{$r
 ZSH_THEME_GIT_PROMPT_PREFIX="[%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[blue]%}]%{$reset_color%}"
 
-ZSH_THEME_GIT_PROMPT_DIRTY="✗%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY_PREFIX="%{$fg[red]%}"
-ZSH_THEME_GIT_PROMPT_CLEAN=" ✔%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CLEAN_PREFIX="%{$fg[green]%}"
 ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[green]%}✚ "
 ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[yellow]%}⚑ "
