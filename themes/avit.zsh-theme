@@ -5,7 +5,7 @@ $(_user_host)${_current_dir}$(git_prompt_info) $FG[105]%(!.#.»)%{$reset_color%}
 
 PROMPT2='%{$fg[grey]%}◀%{$reset_color%} '
 
-RPROMPT='$(_vi_status)%{$(echotc UP 1)%}$(_git_time_since_commit) $(git_prompt_status) ${_return_status}%{$(echotc DO 1)%}'
+RPROMPT='%{$(echotc UP 1)%}$(_git_time_since_commit) ${_return_status}%{$(echotc DO 1)%}'
 
 local _current_dir="%{$fg[blue]%}%3~"
 local _return_status="%{$fg[red]%}%(?..⍉)%{$reset_color%}"
@@ -51,7 +51,7 @@ function _git_time_since_commit() {
       fi
 
       color=$ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL
-      echo "%{$fg[red]%}$(git_remote_status)%{$reset_color%}$(git_prompt_short_sha) - $color$commit_age%{$reset_color%}"
+      echo "%{$fg[red]%}$(git_remote_status)%{$reset_color%} $(git_prompt_short_sha) - $color$commit_age%{$reset_color%}"
     fi
   fi
 }
@@ -71,12 +71,6 @@ ZSH_THEME_GIT_PROMPT_DIRTY="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY_PREFIX="%{$fg[red]%}"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CLEAN_PREFIX="%{$fg[green]%}"
-ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[green]%}✚ "
-ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[yellow]%}⚑ "
-ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}✖ "
-ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[blue]%}▴ "
-ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[cyan]%}§ "
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[grey]%}◒ "
 
 ZSH_THEME_GIT_PROMPT_AHEAD_REMOTE="⇉"
 ZSH_THEME_GIT_PROMPT_BEHIND_REMOTE="⇇"
