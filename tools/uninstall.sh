@@ -4,6 +4,27 @@ then
   rm -rf ~/.oh-my-zsh
 fi
 
+echo "Removing additional files"
+if [[ -f ~/.zshrc ]]
+then
+  rm ~/.zshrc
+fi
+
+if [[ -f ~/.zshrc-e ]]
+then
+  rm ~/.zshrc-e
+fi
+
+if [[ -f ~/.zsh_history ]]
+then
+  rm ~/.zsh_history
+fi
+
+if [[ -f ~/.zsh-update ]]
+then
+  rm ~/.zsh-update
+fi
+
 echo "Looking for original zsh config..."
 if [ -f ~/.zshrc.pre-oh-my-zsh ] || [ -h ~/.zshrc.pre-oh-my-zsh ]
 then
