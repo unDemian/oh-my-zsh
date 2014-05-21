@@ -1,26 +1,18 @@
 # AVIT ZSH Theme
 
 PROMPT='
-$(_user_host)${_current_dir} $(git_prompt_info) $(_ruby_version)
-▶ '
+$(_user_host)${_current_dir}$(git_prompt_info) $FG[105]%(!.#.»)%{$reset_color%} '
 
 PROMPT2='%{$fg[grey]%}◀%{$reset_color%} '
 
 RPROMPT='$(_vi_status)%{$(echotc UP 1)%}$(_git_time_since_commit) $(git_prompt_status) ${_return_status}%{$(echotc DO 1)%}'
 
-local _current_dir="%{$fg[blue]%}%3~%{$reset_color%} "
+local _current_dir="%{$fg[blue]%}%3~"
 local _return_status="%{$fg[red]%}%(?..⍉)%{$reset_color%}"
 local _hist_no="%{$fg[grey]%}%h%{$reset_color%}"
 
 function _user_host() {
-  if [[ -n $SSH_CONNECTION ]]; then
-    me="%n@%m"
-  elif [[ $LOGNAME != $USER ]]; then
-    me="%n"
-  fi
-  if [[ -n $me ]]; then
-    echo "%{$fg[cyan]%}$me%{$reset_color%}:"
-  fi
+  echo "%{$FG[236]%}%n@%m%{$reset_color%} "  
 }
 
 function _vi_status() {
@@ -29,11 +21,6 @@ function _vi_status() {
   fi
 }
 
-function _ruby_version() {
-  if {echo $fpath | grep -q "plugins/rvm"}; then
-    echo "%{$fg[grey]%}$(rvm_prompt_info)%{$reset_color%}"
-  fi
-}
 
 # Determine the time since last commit. If branch is clean,
 # use a neutral color, otherwise colors will vary according to time.
@@ -77,11 +64,13 @@ fi
 
 MODE_INDICATOR="%{$fg_bold[yellow]%}❮%{$reset_color%}%{$fg[yellow]%}❮❮%{$reset_color%}"
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[green]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_PREFIX="[%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[blue]%}]%{$reset_color%}"
 
-ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[red]%}✗%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_CLEAN=" %{$fg[green]%}✔%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_DIRTY="✗%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_DIRTY_PREFIX="%{$fg[red]%}"
+ZSH_THEME_GIT_PROMPT_CLEAN=" ✔%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_CLEAN_PREFIX="%{$fg[green]%}"
 ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[green]%}✚ "
 ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[yellow]%}⚑ "
 ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}✖ "
@@ -93,7 +82,7 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[grey]%}◒ "
 ZSH_THEME_GIT_TIME_SINCE_COMMIT_SHORT="%{$fg[green]%}"
 ZSH_THEME_GIT_TIME_SHORT_COMMIT_MEDIUM="%{$fg[yellow]%}"
 ZSH_THEME_GIT_TIME_SINCE_COMMIT_LONG="%{$fg[red]%}"
-ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL="%{$fg[grey]%}"
+ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL="%{$fg[236]%}"
 
 # LS colors, made with http://geoff.greer.fm/lscolors/
 export LSCOLORS="exfxcxdxbxegedabagacad"

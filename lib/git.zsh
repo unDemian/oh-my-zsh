@@ -3,13 +3,13 @@ function git_prompt_info() {
   if [[ "$(git config --get oh-my-zsh.hide-status)" != "1" ]]; then
     ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
     ref=$(command git rev-parse --short HEAD 2> /dev/null) || return
-    echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+    echo "$ZSH_THEME_GIT_PROMPT_PREFIX$(parse_git)$ZSH_THEME_GIT_PROMPT_SUFFIX"
   fi
 }
 
 
 # Checks if working tree is dirty
-parse_git_dirty() {
+parse_git() {
   local SUBMODULE_SYNTAX=''
   local GIT_STATUS=''
   local CLEAN_MESSAGE='nothing to commit (working directory clean)'
@@ -23,12 +23,12 @@ parse_git_dirty() {
         GIT_STATUS=$(command git status -s ${SUBMODULE_SYNTAX} 2> /dev/null | tail -n1)
     fi
     if [[ -n $GIT_STATUS ]]; then
-      echo "$ZSH_THEME_GIT_PROMPT_DIRTY"
+      echo "$ZSH_THEME_GIT_PROMPT_DIRTY_PREFIX${ref#refs/heads/}$ZSH_THEME_GIT_PROMPT_DIRTY" 
     else
-      echo "$ZSH_THEME_GIT_PROMPT_CLEAN"
+      echo "$ZSH_THEME_GIT_PROMPT_CLEAN_PREFIX${ref#refs/heads/}$ZSH_THEME_GIT_PROMPT_CLEAN"
     fi
   else
-    echo "$ZSH_THEME_GIT_PROMPT_CLEAN"
+    echo "$ZSH_THEME_GIT_PROMPT_CLEAN_PREFIX${ref#refs/heads/}$ZSH_THEME_GIT_PROMPT_CLEAN"
   fi
 }
 
