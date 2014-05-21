@@ -18,7 +18,7 @@ You can change the install directory with the ZSH environment variable, either
 by running `export ZSH=/your/path` before installing, or setting it before the
 end of the install pipeline like this:
 
-@curl -L https://raw.githubusercontent.com/unDemian/oh-my-zsh/master/tools/install.sh | ZSH=~/.dotfiles/zsh sh@
+@curl -L https://raw.githubusercontent.com/unDemian/oh-my-zsh/master/tools/install.sh | sh@
 
 h3. Problems?
 
