@@ -51,7 +51,7 @@ function _git_time_since_commit() {
       fi
 
       color=$ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL
-      echo "$color$commit_age%{$reset_color%}"
+      echo "%{$fg[red]%}$(git_remote_status)%{$reset_color%}$(git_prompt_short_sha) - $color$commit_age%{$reset_color%}"
     fi
   fi
 }
@@ -77,6 +77,10 @@ ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}✖ "
 ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[blue]%}▴ "
 ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[cyan]%}§ "
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[grey]%}◒ "
+
+ZSH_THEME_GIT_PROMPT_AHEAD_REMOTE="⇉"
+ZSH_THEME_GIT_PROMPT_BEHIND_REMOTE="⇇"
+ZSH_THEME_GIT_PROMPT_DIVERGED_REMOTE="⇄"
 
 # Colors vary depending on time lapsed.
 ZSH_THEME_GIT_TIME_SINCE_COMMIT_SHORT="%{$fg[green]%}"
