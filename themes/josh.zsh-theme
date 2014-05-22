@@ -1,4 +1,4 @@
-grey='\e[0;90m'
+agrey='\e[0;90m'
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$grey%}("
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
