@@ -5,22 +5,14 @@ $(_user_host)${_current_dir}$(git_prompt_info) $FG[105]%(!.#.»)%{$reset_color%}
 
 PROMPT2='%{$fg[grey]%}◀%{$reset_color%} '
 
-RPROMPT='%{$(echotc UP 1)%}$(_git_time_since_commit) ${_return_status}%{$(echotc DO 1)%}'
+RPROMPT='%{$(echotc UP 1)%}$(_git_time_since_commit) %{$(echotc DO 1)%}'
 
 local _current_dir="%{$fg[blue]%}%3~"
-local _return_status="%{$fg[red]%}%(?..⍉)%{$reset_color%}"
 local _hist_no="%{$fg[grey]%}%h%{$reset_color%}"
 
 function _user_host() {
   echo "%{$FG[236]%}%n@%m%{$reset_color%} "  
 }
-
-function _vi_status() {
-  if {echo $fpath | grep -q "plugins/vi-mode"}; then
-    echo "$(vi_mode_prompt_info)"
-  fi
-}
-
 
 # Determine the time since last commit. If branch is clean,
 # use a neutral color, otherwise colors will vary according to time.
@@ -51,8 +43,8 @@ function _git_time_since_commit() {
       fi
 
       color=$ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL
-      echo "%{$fg[red]%}$(git_remote_status)%{$reset_color%} $(git_prompt_short_sha) - $color$commit_age%{$reset_color%}"
-    fi
+      echo "%{$fg[red]%}$(git_remote_status)%{$reset_color%} %{$fg[yellow]%}$(git_prompt_long_sha)%{$reset_color%} - $color$commit_age%{$reset_color%} ago"
+   fi
   fi
 }
 
