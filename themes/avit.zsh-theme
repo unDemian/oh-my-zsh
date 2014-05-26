@@ -43,7 +43,7 @@ function _git_time_since_commit() {
       fi
 
       color=$ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL
-      echo "%{$fg[red]%}$(git_remote_status)%{$reset_color%} %{$fg[yellow]%}$(git_prompt_long_sha)%{$reset_color%} - $color$commit_age%{$reset_color%} ago"
+      echo "%{$fg[red]%}$(git_remote_status)%{$reset_color%} %{$fg[yellow]%}$(git_prompt_short_sha)%{$reset_color%} - $color$commit_age%{$reset_color%} ago"
    fi
   fi
 }
@@ -56,8 +56,8 @@ fi
 
 MODE_INDICATOR="%{$fg_bold[yellow]%}❮%{$reset_color%}%{$fg[yellow]%}❮❮%{$reset_color%}"
 
-ZSH_THEME_GIT_PROMPT_PREFIX="[%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[blue]%}]%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_PREFIX=" %{$reset_color%}⭠ "
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[blue]%}%{$reset_color%}"
 
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY_PREFIX="%{$fg[red]%}"
