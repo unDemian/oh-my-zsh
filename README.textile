@@ -1,10 +1,9 @@
 
 oh-my-zsh is an open source, community-driven framework for managing your ZSH configuration. It comes bundled with a ton of helpful functions, helpers, plugins, themes, and few things that make you shout...
 
-bq. "OH MY ZSHELL!"
+h2. Installation
 
 @curl -L https://raw.githubusercontent.com/unDemian/oh-my-zsh/master/tools/install.sh | sh@
-
 
 h2. Useful
 
