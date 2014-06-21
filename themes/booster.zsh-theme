@@ -1,22 +1,23 @@
-# AVIT ZSH Theme
+# Booster ZSH Theme
 
-PROMPT='
+PROMPT='--------------------------------------------------------------------------------------
+
 $(_user_host)${_current_dir}$(git_prompt_info) $FG[105]%(!.#.»)%{$reset_color%} '
+RPROMPT='$(_right_prompt)'
 
-PROMPT2='%{$fg[grey]%}◀%{$reset_color%} '
-
-RPROMPT='%{$(echotc UP 1)%}$(_git_time_since_commit) %{$(echotc DO 1)%}'
-
-local _current_dir="%{$fg[blue]%}%3~"
+local _current_dir="%{$fg[blue]%}%~"
 local _hist_no="%{$fg[grey]%}%h%{$reset_color%}"
 
 function _user_host() {
-  echo "%{$FG[236]%}%n@%m%{$reset_color%} "  
+  if [[ -n $SSH_CONNECTION ]]; then
+    me="%{$FG[236]%}%n@%m%{$reset_color%} "  
+  else
+    me=""  
+  fi
+  echo "$me"
 }
 
-# Determine the time since last commit. If branch is clean,
-# use a neutral color, otherwise colors will vary according to time.
-function _git_time_since_commit() {
+function _right_prompt() {
   if git rev-parse --git-dir > /dev/null 2>&1; then
     # Only proceed if there is actually a commit.
     if [[ $(git log 2>&1 > /dev/null | grep -c "^fatal: bad default revision") == 0 ]]; then
@@ -43,7 +44,7 @@ function _git_time_since_commit() {
       fi
 
       color=$ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL
-      echo "%{$fg[red]%}$(git_remote_status)%{$reset_color%} %{$fg[yellow]%}$(git_prompt_short_sha)%{$reset_color%} - $color$commit_age%{$reset_color%} ago"
+      echo "$(git_stashed_items) %{$fg[red]%}$(git_remote_status)%{$reset_color%} %{$fg[yellow]%}$(git_prompt_short_sha)%{$reset_color%} - $color$commit_age%{$reset_color%} ago"
    fi
   fi
 }

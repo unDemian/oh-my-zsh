@@ -7,6 +7,13 @@ function git_prompt_info() {
   fi
 }
 
+# get stashed items
+function git_stashed_items() {
+  count=$(command git stash list | wc -l | tr -d ' ')
+  if [[ $count -gt 0 ]]; then
+    echo "◎  $count"
+  fi
+}
 
 # Checks if working tree is dirty
 parse_git() {
