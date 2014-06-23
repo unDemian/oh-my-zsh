@@ -1,9 +1,13 @@
 
 oh-my-zsh is an open source, community-driven framework for managing your ZSH configuration. It comes bundled with a ton of helpful functions, helpers, plugins, themes, and few things that make you shout...
 
+<img src="http://i60.tinypic.com/2dij51y.png" />
+
 h2. Installation
 
 @curl -L https://raw.githubusercontent.com/unDemian/oh-my-zsh/master/tools/install.sh | sh@
+
+Also I use the <a href="https://github.com/tomislav/osx-terminal.app-colors-solarized">solarized</a> theme for terminal.
 
 h2. Useful
 
