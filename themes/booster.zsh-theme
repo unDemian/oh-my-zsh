@@ -1,82 +1,70 @@
 # Booster ZSH Theme
+#
+# v0.0.1
+# @author Andrei Demian
+#
 
-PROMPT='--------------------------------------------------------------------------------------
+# COLORS
+###########################################################################################
 
-$(_user_host)${_current_dir}$(git_prompt_info) $FG[105]%(!.#.»)%{$reset_color%} '
-RPROMPT='$(_right_prompt)'
+# Prompt colors
+ZSH_THEME_PROMPT_CURRENT="%{$fg[blue]%}"
+ZSH_THEME_PROMPT_USER="%{$FG[236]%}"
+ZSH_THEME_PROMPT_CARRET=" %{$FG[105]%}"
 
-local _current_dir="%{$fg[blue]%}%~"
-local _hist_no="%{$fg[grey]%}%h%{$reset_color%}"
-
-function _user_host() {
-  if [[ -n $SSH_CONNECTION ]]; then
-    me="%{$FG[236]%}%n@%m%{$reset_color%} "  
-  else
-    me=""  
-  fi
-  echo "$me"
-}
-
-function _right_prompt() {
-  if git rev-parse --git-dir > /dev/null 2>&1; then
-    # Only proceed if there is actually a commit.
-    if [[ $(git log 2>&1 > /dev/null | grep -c "^fatal: bad default revision") == 0 ]]; then
-      # Get the last commit.
-      last_commit=$(git log --pretty=format:'%at' -1 2> /dev/null)
-      now=$(date +%s)
-      seconds_since_last_commit=$((now-last_commit))
-
-      # Totals
-      minutes=$((seconds_since_last_commit / 60))
-      hours=$((seconds_since_last_commit/3600))
-
-      # Sub-hours and sub-minutes
-      days=$((seconds_since_last_commit / 86400))
-      sub_hours=$((hours % 24))
-      sub_minutes=$((minutes % 60))
-
-      if [ $hours -gt 24 ]; then
-          commit_age="${days}d"
-      elif [ $minutes -gt 60 ]; then
-          commit_age="${sub_hours}h${sub_minutes}m"
-      else
-          commit_age="${minutes}m"
-      fi
-
-      color=$ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL
-      echo "$(git_stashed_items) %{$fg[red]%}$(git_remote_status)%{$reset_color%} %{$fg[yellow]%}$(git_prompt_short_sha)%{$reset_color%} - $color$commit_age%{$reset_color%} ago"
-   fi
-  fi
-}
-
+# Carret Color
 if [[ $USER == "root" ]]; then
   CARETCOLOR="red"
 else
   CARETCOLOR="white"
 fi
 
-MODE_INDICATOR="%{$fg_bold[yellow]%}❮%{$reset_color%}%{$fg[yellow]%}❮❮%{$reset_color%}"
+# LS colors, made with http://geoff.greer.fm/lscolors/
+export LSCOLORS="exfxcxdxbxegedabagacad"
+export LS_COLORS='di=34;40:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:'
+export GREP_COLOR='1;33'
 
+# Color & Style for git prompt
 ZSH_THEME_GIT_PROMPT_PREFIX=" %{$reset_color%}⭠ "
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[blue]%}%{$reset_color%}"
+ZSH_THEME_GIT_LAST_COMMIT="%{$reset_color%}"
 
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY_PREFIX="%{$fg[red]%}"
 ZSH_THEME_GIT_PROMPT_CLEAN="%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CLEAN_PREFIX="%{$fg[green]%}"
 
-ZSH_THEME_GIT_PROMPT_AHEAD_REMOTE="⇉"
-ZSH_THEME_GIT_PROMPT_BEHIND_REMOTE="⇇"
-ZSH_THEME_GIT_PROMPT_DIVERGED_REMOTE="⇄"
+# Color & Style for git stashed items
+ZSH_THEME_GIT_STASHED_PREFIX="%{$fg[yellow]%}☲ "
+ZSH_THEME_GIT_STASHED=" stashed items %{$reset_color%}"
+ZSH_THEME_GIT_STASHED_SUFFIX="    ----"
 
-# Colors vary depending on time lapsed.
-ZSH_THEME_GIT_TIME_SINCE_COMMIT_SHORT="%{$fg[green]%}"
-ZSH_THEME_GIT_TIME_SHORT_COMMIT_MEDIUM="%{$fg[yellow]%}"
-ZSH_THEME_GIT_TIME_SINCE_COMMIT_LONG="%{$fg[red]%}"
-ZSH_THEME_GIT_TIME_SINCE_COMMIT_NEUTRAL="%{$fg[236]%}"
+# Colors & Style for git remote status
+ZSH_THEME_GIT_PROMPT_AHEAD_REMOTE="%{$fg[red]%}    ⇉ Branch is AHEAD    %{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_BEHIND_REMOTE="%{$fg[red]%}    ⇇ Branch is BEHIND    %{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_DIVERGED_REMOTE="%{$fg[red]%}    ⇄ Branch is DIVERGED    %{$reset_color%}"
 
-# LS colors, made with http://geoff.greer.fm/lscolors/
-export LSCOLORS="exfxcxdxbxegedabagacad"
-export LS_COLORS='di=34;40:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:'
-export GREP_COLOR='1;33'
+# PROMPT
+###########################################################################################
+
+# Prompt variables
+local separator=${(l:${COLUMNS}-55::-:)}
+local current_dir="$ZSH_THEME_PROMPT_CURRENT%~"
+
+# Prompt methods
+function user_host() {
+  if [[ -n $SSH_CONNECTION ]]; then
+    me="$ZSH_THEME_PROMPT_USER%n@%m%{$reset_color%} "  
+  else
+    me=""  
+  fi
+  echo "$me"
+}
+
+# Prompt
+PROMPT='
+${separator} $(git_remote_status) $(git_stashed_items)
+$(user_host)${current_dir}$(git_prompt_info)$ZSH_THEME_PROMPT_CARRET%(!.#.»)%{$reset_color%} '
+
+RPROMPT='$(git_last_commit)'
 

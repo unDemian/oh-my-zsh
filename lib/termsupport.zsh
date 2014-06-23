@@ -14,8 +14,8 @@ function title {
   fi
 }
 
-ZSH_THEME_TERM_TAB_TITLE_IDLE="%n@%m: %15<..<%~%<<" #15 char left truncated PWD
-ZSH_THEME_TERM_TITLE_IDLE="%n@%m: %~"
+ZSH_THEME_TERM_TAB_TITLE_IDLE=": %30<..<%~%<<" #15 char left truncated PWD
+ZSH_THEME_TERM_TITLE_IDLE=": %~"
 
 #Appears when you have the prompt
 function omz_termsupport_precmd {
